@@ -1,17 +1,813 @@
 ---
-
 ---
-
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Artur Podchaev — Full-Stack Engineer, AI Systems, Product Builder from Tashkent.">
+<title>Artur Podchaev // System Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07050f;--surface:#0e0a1a;
+  --border:rgba(103,232,194,0.07);--border2:rgba(103,232,194,0.16);
+  --text:#f0eeff;--muted:rgba(240,238,255,0.38);
+  --accent:#67e8c2;--purple:#4e16b3;--purpleL:#7b3fe4;
+  --mono:'Space Mono',monospace;--sans:'Syne',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;cursor:none}
+#cur{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s}
+#cur-r{position:fixed;width:30px;height:30px;border:1px solid rgba(103,232,194,.32);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(103,232,194,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(103,232,194,.03) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
+.blob{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.blob-1{width:520px;height:520px;background:radial-gradient(circle,rgba(78,22,179,.22) 0%,transparent 70%);top:-120px;right:-100px}
+.blob-2{width:380px;height:380px;background:radial-gradient(circle,rgba(103,232,194,.08) 0%,transparent 70%);bottom:25%;left:-80px}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:120px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(16px);background:rgba(7,5,15,.8)}
+.nav-logo{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em;flex-shrink:0}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.08em;transition:color .2s;position:relative;cursor:none}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .25s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-dot{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.dot-pulse{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+.lang-sw{display:flex;align-items:center;border:1px solid var(--border);overflow:hidden}
+.lang-btn{padding:5px 10px;background:transparent;border:none;color:var(--muted);cursor:none;font-family:var(--mono);font-size:11px;letter-spacing:.06em;transition:background .2s,color .2s}
+.lang-btn.active{background:var(--accent);color:#07050f;font-weight:700}
+.lang-btn:hover:not(.active){color:var(--text)}
+
+/* i18n — EN active by default */
+[data-lang]{display:none}
+[data-lang].active{display:inline}
+div[data-lang].active{display:block}
+p[data-lang].active{display:block}
+h2[data-lang].active{display:block}
+span[data-lang].active{display:inline}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 48px 100px;z-index:1}
+.hero-coords{font-family:var(--mono);font-size:11px;color:rgba(103,232,194,.32);margin-bottom:32px;letter-spacing:.12em;animation:fadeUp .7s .1s both}
+.hero-tag{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid rgba(103,232,194,.18);padding:7px 14px;margin-bottom:36px;letter-spacing:.08em;width:fit-content;animation:fadeUp .7s .2s both}
+.hero-h{font-size:clamp(52px,8.5vw,100px);font-weight:800;line-height:.93;letter-spacing:-.03em;margin-bottom:48px;animation:fadeUp .7s .35s both}
+.hero-h .line{display:block}
+.hero-h .outline{color:transparent;-webkit-text-stroke:1px rgba(240,238,255,.18)}
+.hero-h .teal{color:var(--accent)}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;animation:fadeUp .7s .5s both}
+.hero-desc{max-width:400px;font-family:var(--mono);font-size:12px;line-height:1.9;color:var(--muted)}
+.hero-actions{display:flex;gap:12px;flex-shrink:0}
+.btn-p{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#07050f;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;padding:13px 22px;border:none;cursor:none;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn-p:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 rgba(103,232,194,.18)}
+.btn-o{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:13px 22px;border:1px solid var(--border);cursor:none;text-decoration:none;transition:color .2s,border-color .2s}
+.btn-o:hover{color:var(--text);border-color:var(--border2)}
+.scroll-hint{position:absolute;bottom:44px;left:48px;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:10px;color:rgba(240,238,255,.16);letter-spacing:.12em;animation:fadeUp .7s .9s both}
+.scroll-line{width:40px;height:1px;background:linear-gradient(90deg,var(--accent),transparent);animation:sp 2.2s 1.5s infinite}
+@keyframes sp{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* MARQUEE */
+.mq-wrap{position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:13px 0;background:rgba(78,22,179,.05)}
+.mq-track{display:flex;gap:44px;width:max-content;animation:mq 24s linear infinite}
+.mq-item{font-family:var(--mono);font-size:11px;color:rgba(103,232,194,.32);letter-spacing:.1em;white-space:nowrap;flex-shrink:0}
+.mq-item .d{color:var(--purpleL);margin:0 6px}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:88px 48px;border-top:1px solid var(--border)}
+.sec-label{font-family:var(--mono);font-size:11px;color:rgba(103,232,194,.42);letter-spacing:.12em;margin-bottom:52px;display:flex;align-items:center;gap:16px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border);max-width:160px}
+
+/* STATS */
+.stats-band{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.stat-c{background:var(--bg);padding:30px 36px;transition:background .2s;cursor:none}
+.stat-c:hover{background:var(--surface)}
+.stat-n{font-size:36px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:7px}
+.stat-n em{font-style:normal;color:var(--accent)}
+.stat-l{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.proj-c{background:var(--bg);padding:40px;position:relative;overflow:hidden;cursor:none;transition:background .3s}
+.proj-c:hover{background:var(--surface)}
+.proj-c::before{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--accent));transition:width .42s ease}
+.proj-c:hover::before{width:100%}
+.proj-num{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.22);margin-bottom:18px;letter-spacing:.12em}
+.proj-title{font-size:20px;font-weight:700;margin-bottom:11px;letter-spacing:-.02em;line-height:1.2}
+.proj-desc{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.75;margin-bottom:22px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.tag{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.55);border:1px solid rgba(103,232,194,.1);padding:4px 9px;letter-spacing:.05em}
+.proj-arrow{font-size:17px;color:var(--muted);transition:color .2s,transform .2s;display:inline-block;text-decoration:none}
+.proj-c:hover .proj-arrow{color:var(--accent);transform:translate(4px,-4px)}
+.proj-c.feat{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.proj-vis{height:250px;border:1px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.mol-wrap{position:relative;width:160px;height:160px;display:flex;align-items:center;justify-content:center}
+.ring{position:absolute;border:1px solid;border-radius:50%}
+.r1{width:56px;height:56px;border-color:rgba(103,232,194,.5);animation:spin 5s linear infinite}
+.r2{width:96px;height:96px;border-color:rgba(78,22,179,.65);animation:spin 9s linear infinite reverse}
+.r3{width:144px;height:144px;border-color:rgba(103,232,194,.14);animation:spin 14s linear infinite}
+.ring::after{content:'';position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:7px;height:7px;background:var(--accent);border-radius:50%}
+.r2::after{background:var(--purpleL)}
+.r3::after{background:rgba(103,232,194,.35);width:5px;height:5px}
+.cdot{width:10px;height:10px;background:var(--accent);border-radius:50%;position:relative;z-index:2;box-shadow:0 0 14px rgba(103,232,194,.55)}
+.vis-label{position:absolute;font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.28);bottom:11px;left:13px;letter-spacing:.06em}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--border);position:relative}
+.tl-item::before{content:'';position:absolute;left:199px;top:0;bottom:0;width:1px;background:var(--border)}
+.tl-date{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.35);letter-spacing:.08em;margin-bottom:8px}
+.tl-company{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.05em}
+.tl-role{font-size:16px;font-weight:700;margin-bottom:10px;letter-spacing:-.01em}
+.tl-body{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.8}
+.tl-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+
+/* BENTO */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.bento-c{background:var(--bg);padding:36px;transition:background .2s;cursor:none}
+.bento-c:hover{background:var(--surface)}
+.bento-c.wide{grid-column:span 2}
+.bento-label{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.32);letter-spacing:.1em;margin-bottom:16px}
+.bento-h{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:12px;line-height:1.2}
+.bento-body{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.85}
+.bento-body p+p{margin-top:12px}
+.bento-num{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1;margin-bottom:6px}
+.bento-num em{font-style:normal;color:var(--accent)}
+.skill-row{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--border)}
+.skill-row:last-child{border-bottom:none}
+.skill-name{font-family:var(--mono);font-size:10px;color:var(--muted);width:80px;flex-shrink:0;letter-spacing:.04em}
+.skill-track{flex:1;height:2px;background:rgba(255,255,255,.05)}
+.skill-fill{height:100%;background:linear-gradient(90deg,var(--purpleL),var(--accent));width:0%;transition:width 1.4s cubic-bezier(.16,1,.3,1)}
+.skill-pct{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.38);width:28px;text-align:right}
+
+/* GALLERY — masonry */
+.gallery-masonry{
+  columns:3;
+  column-gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+}
+.gallery-item{
+  position:relative;
+  overflow:hidden;
+  break-inside:avoid;
+  background:var(--surface);
+  cursor:none;
+  display:block;
+  margin-bottom:1px;
+}
+.gallery-item img{
+  width:100%;
+  height:auto;
+  display:block;
+  transition:transform .55s cubic-bezier(.16,1,.3,1),filter .4s ease;
+  filter:grayscale(15%) brightness(0.82);
+}
+.gallery-item:hover img{transform:scale(1.05);filter:grayscale(0%) brightness(1)}
+.g-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(7,5,15,.8) 0%,transparent 50%);
+  opacity:0;transition:opacity .35s;
+  display:flex;align-items:flex-end;padding:16px;
+}
+.gallery-item:hover .g-overlay{opacity:1}
+.g-caption{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.1em}
+.g-placeholder{
+  width:100%;height:200px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.18);letter-spacing:.08em;
+}
+.g-placeholder svg{width:28px;height:28px;opacity:.15;stroke:var(--accent);fill:none;stroke-width:1.5}
+
+/* MUSIC */
+.music-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.tracks-side{background:var(--bg);padding:40px}
+.tracks-label{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.32);letter-spacing:.1em;margin-bottom:14px}
+.tracks-sub{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:28px}
+.tracks-list{display:flex;flex-direction:column}
+.s-track{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--border);text-decoration:none;cursor:none;transition:all .2s}
+.s-track:last-child{border-bottom:none}
+.s-track:hover .s-name{color:var(--accent)}
+.s-num{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.22);width:20px;flex-shrink:0}
+.s-info{flex:1}
+.s-name{font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--text);transition:color .2s}
+.s-artist{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:3px}
+.s-time{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.32);flex-shrink:0;letter-spacing:.04em}
+.s-play{width:26px;height:26px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .2s,background .2s}
+.s-track:hover .s-play{border-color:var(--accent);background:rgba(103,232,194,.08)}
+.s-play svg{width:9px;height:9px;fill:var(--accent);margin-left:2px}
+.s-track.active-track .s-name{color:var(--accent)}
+.s-track.active-track .s-play{border-color:var(--accent);background:rgba(103,232,194,.12)}
+.s-track.active-track .s-num{color:var(--accent)}
+.spotify-iframe-side{background:var(--surface);display:flex;align-items:stretch;min-height:340px}
+.spotify-iframe-side iframe{flex:1}
+
+/* ARTICLES */
+.articles-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.art-c{background:var(--bg);padding:40px;position:relative;overflow:hidden;cursor:none;transition:background .3s}
+.art-c:hover{background:var(--surface)}
+.art-c::before{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--purpleL),var(--accent));transition:width .42s}
+.art-c:hover::before{width:100%}
+.art-tag{font-family:var(--mono);font-size:10px;color:rgba(103,232,194,.35);letter-spacing:.1em;margin-bottom:18px}
+.art-title{font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:12px}
+.art-body{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:24px}
+.art-link{font-family:var(--mono);font-size:11px;color:var(--accent);text-decoration:none;letter-spacing:.06em;cursor:none;transition:opacity .2s}
+.art-link:hover{opacity:.7}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36px 48px;display:flex;align-items:center;justify-content:space-between}
+.foot-copy{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,.14)}
+.foot-links{display:flex;gap:26px}
+.foot-links a{font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;transition:color .2s;letter-spacing:.06em;cursor:none}
+.foot-links a:hover{color:var(--accent)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+<div class="grid-bg"></div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AP // v2.0</div>
+  <ul class="nav-links">
+    <li><a href="#projects"><span data-lang="en" class="active">projects</span><span data-lang="ru">проекты</span></a></li>
+    <li><a href="#experience"><span data-lang="en" class="active">experience</span><span data-lang="ru">опыт</span></a></li>
+    <li><a href="#about"><span data-lang="en" class="active">about</span><span data-lang="ru">обо мне</span></a></li>
+    <li><a href="#gallery"><span data-lang="en" class="active">photos</span><span data-lang="ru">фото</span></a></li>
+    <li><a href="#articles"><span data-lang="en" class="active">writing</span><span data-lang="ru">статьи</span></a></li>
+    <li><a href="#contact"><span data-lang="en" class="active">contact</span><span data-lang="ru">контакты</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-dot">
+      <div class="dot-pulse"></div>
+      <span data-lang="en" class="active">available for work</span>
+      <span data-lang="ru">открыт к работе</span>
+    </div>
+    <div class="lang-sw">
+      <button class="lang-btn active" data-switch="en">EN</button>
+      <button class="lang-btn" data-switch="ru">RU</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-coords">41.2995° N, 69.2401° E // TASHKENT, UZ // SYSTEM ONLINE</div>
+  <div class="hero-tag">
+    <span>◆</span>
+    <span data-lang="en" class="active">FULL-STACK ENGINEER · AI SYSTEMS · PRODUCT MANAGER</span>
+    <span data-lang="ru">FULL-STACK · AI СИСТЕМЫ · ПРОДУКТ МЭНЕДЖЕР</span>
+  </div>
+  <h1 class="hero-h">
+    <span class="line en-line">I build systems</span>
+    <span class="line ru-line" style="display:none">Я строю системы,</span>
+    <span class="line outline en-line">that actually</span>
+    <span class="line outline ru-line" style="display:none">которые реально</span>
+    <span class="line en-line teal">ship</span>
+	<span class="line ru-line teal" style="display:none">работают</span>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      <span data-lang="en" class="active">Backend engineer and product builder from Tashkent. I design systems that hold up in production — REST APIs, AI pipelines, VR simulations, real integrations. 1000+ LeetCode problems. 365-day streak. Building at Insight and running Exority Studio</span>
+      <span data-lang="ru">Бэкенд-инженер из Ташкента. Строю системы, которые работают в продакшне — API, AI-пайплайны, VR-симуляции. 1000+ задач на LeetCode, стрик 365 дней. Работаю в Insight, развиваю Exority Studio</span>
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-p">
+        <span data-lang="en" class="active">VIEW WORK ↗</span>
+        <span data-lang="ru">ПРОЕКТЫ ↗</span>
+      </a>
+      <a href="#contact" class="btn-o">
+        <span data-lang="en" class="active">CONTACT →</span>
+        <span data-lang="ru">КОНТАКТЫ →</span>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span data-lang="en" class="active">SCROLL TO EXPLORE</span>
+    <span data-lang="ru">СКРОЛЛИТЬ</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap"><div class="mq-track" id="mqt"></div></div>
+
+<!-- STATS -->
+<section style="padding:60px 48px;border-top:1px solid var(--border)">
+  <div class="stats-band reveal">
+    <div class="stat-c">
+      <div class="stat-n">1000<em>+</em></div>
+      <div class="stat-l"><span data-lang="en" class="active">leetcode solved</span><span data-lang="ru">задач решено</span></div>
+    </div>
+    <div class="stat-c">
+      <div class="stat-n">365<em>d</em></div>
+      <div class="stat-l"><span data-lang="en" class="active">longest streak</span><span data-lang="ru">максимальный стрик</span></div>
+    </div>
+    <div class="stat-c">
+      <div class="stat-n">top <em>12%</em></div>
+      <div class="stat-l"><span data-lang="en" class="active">global ranking</span><span data-lang="ru">мировой рейтинг</span></div>
+    </div>
+    <div class="stat-c">
+      <div class="stat-n">2<em>×</em></div>
+      <div class="stat-l"><span data-lang="en" class="active">published articles</span><span data-lang="ru">опубликованных статьи</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-label">// 01 — <span data-lang="en" class="active">SELECTED WORK</span><span data-lang="ru">ПРОЕКТЫ</span></div>
+  <div class="proj-grid reveal">
+
+    <div class="proj-c feat">
+      <div class="proj-vis">
+        <div class="mol-wrap">
+          <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+          <div class="cdot"></div>
+        </div>
+        <span class="vis-label">VR_CHEM_SIM.unity // render active</span>
+      </div>
+      <div>
+        <div class="proj-num">001 // FEATURED — LEAD DEVELOPER</div>
+        <h3 class="proj-title">VR Chemistry Laboratory</h3>
+        <p class="proj-desc">
+          <span data-lang="en" class="active">Built a full VR chemistry lab from scratch — technical specs, Unity MVP, reaction logic for salts and oxides in C#. The core challenge was an architecture flexible enough to add new reactions without breaking anything</span>
+          <span data-lang="ru">Разработал VR-симуляцию химической лаборатории с нуля — от ТЗ до MVP в Unity. Логика реакций солей и оксидов на C#. Главный вызов — архитектура, в которую можно добавлять новые реакции, не ломая старые</span>
+        </p>
+        <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">VR</span><span class="tag">Physics Engine</span><span class="tag">UX Design</span></div>
+        <span class="proj-arrow">↗</span>
+      </div>
+    </div>
+
+    <div class="proj-c">
+      <div class="proj-num">002 // OPERATIONS</div>
+      <h3 class="proj-title">Bukhara Biennial</h3>
+      <p class="proj-desc">
+        <span data-lang="en" class="active">Technical link between international artists from 30+ countries and local construction teams. Turned abstract concepts into concrete instructions, managed equipment logistics from Tashkent, kept installations on schedule under real pressure</span>
+        <span data-lang="ru">Технический медиатор между художниками из 30+ стран и местными строителями. Переводил абстрактные концепции в конкретные инструкции, управлял логистикой оборудования и сроками монтажа в условиях реального давления</span>
+      </p>
+      <div class="tags"><span class="tag">International Ops</span><span class="tag">Logistics</span><span class="tag">Technical Translation</span></div>
+      <a href="https://www.bukharabiennial.uz/" class="proj-arrow" target="_blank" rel="noopener">↗</a>
+    </div>
+
+    <div class="proj-c">
+      <div class="proj-num">003 // FOUNDER</div>
+      <h3 class="proj-title">Exority Studio</h3>
+      <p class="proj-desc">
+        <span data-lang="en" class="active">A studio I run that builds AI tools and automation systems for businesses. The pitch is simple: replace slow manual processes with infrastructure that actually scales — AI agents, CRM integrations, Telegram bots, custom SaaS etc.</span>
+        <span data-lang="ru">Студия, которую я основал, — строим AI-инструменты и системы автоматизации для бизнеса. Заменяем медленные ручные процессы инфраструктурой, которая масштабируется: AI-агенты, CRM, Telegram-боты, SaaS и многое другое</span>
+      </p>
+      <div class="tags"><span class="tag">AI Agents</span><span class="tag">Automation</span><span class="tag">SaaS</span><span class="tag">Founder</span></div>
+      <a href="https://exority-studio.uz/" class="proj-arrow" target="_blank" rel="noopener">↗</a>
+    </div>
+
+    <div class="proj-c">
+      <div class="proj-num">004 // COLLABORATIVE MVP</div>
+      <h3 class="proj-title">Gym-AI</h3>
+      <p class="proj-desc">
+        <span data-lang="en" class="active">I joined a team that was creating a fitness app with artificial intelligence and computer vision at an early stage. I took a product idea and turned it into an MVP with a clear, realistic interaction process that will be implemented in practice. Soon</span>
+        <span data-lang="ru">Присоединился к команде, которая на ранней стадии создавала фитнес-приложение с искусственным интеллектом и компьютерным зрением. Взял идею продукта и превратил ее в MVP с четким, реалистичным процессом взаимодействия, которая будет реализован на практике. Скоро</span>
+      </p>
+      <div class="tags"><span class="tag">AI</span><span class="tag">Computer Vision</span><span class="tag">Product</span><span class="tag">UX</span></div>
+      <a href="https://github.com/albert-ios/Gym-AI" class="proj-arrow" target="_blank" rel="noopener">↗</a>
+    </div>
+
+    <div class="proj-c">
+      <div class="proj-num">005 // CO-FOUNDER</div>
+      <h3 class="proj-title">Youth Data Club</h3>
+      <p class="proj-desc">
+        <span data-lang="en" class="active">Co-founded a student community in Tashkent for people who wanted to go deeper into data science than school allows. Built the learning structure, ran technical meetups, and grew a group of people who actually showed up consistently</span>
+        <span data-lang="ru">Сооснователь студенческого сообщества в Ташкенте — для тех, кто хочет глубже в Data Science, чем позволяет школа. Выстроил структуру обучения, проводил митапы, собрал команду постоянных участников</span>
+      </p>
+      <div class="tags"><span class="tag">Community</span><span class="tag">Data Science</span><span class="tag">Leadership</span></div>
+      <a href="https://t.me/youthdataclub_uz" class="proj-arrow" target="_blank" rel="noopener">↗</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-label">// 02 — <span data-lang="en" class="active">EXPERIENCE</span><span data-lang="ru">ОПЫТ</span></div>
+  <div class="timeline reveal">
+
+    <div class="tl-item">
+      <div>
+        <div class="tl-date">MAR 2026 — <span data-lang="en" class="active">PRESENT</span><span data-lang="ru">СЕЙЧАС</span></div>
+        <div class="tl-company">Insight</div>
+      </div>
+      <div>
+        <div class="tl-role">C# Developer</div>
+        <div class="tl-body">
+          <span data-lang="en" class="active">Microservices for a survey platform built on .NET and PostgreSQL. The architecture is event-driven — RabbitMQ and NATS handle messaging between services, which means understanding the full flow before touching anything. Currently deep in the survey engine itself: rule-based branching logic, dynamic question trees, and making sure edge cases don't silently corrupt data. Every feature goes through the question — what happens when something upstream changes? I write code that anticipates that</span>
+          <span data-lang="ru">Микросервисы для платформы опросов на .NET и PostgreSQL. Архитектура event-driven — RabbitMQ и NATS между сервисами, что значит: прежде чем что-то трогать, нужно понять весь поток целиком. Сейчас глубоко в движке опросов: rule-based логика ветвления, динамические деревья вопросов, обработка граничных случаев без тихой порчи данных. Каждая фича проходит через вопрос — что сломается, если что-то изменится выше по цепочке? Пишу код, который это предусматривает</span>
+        </div>
+        <div class="tl-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">PostgreSQL</span><span class="tag">RabbitMQ</span><span class="tag">REST API</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div>
+        <div class="tl-date">MAR 2026 — <span data-lang="en" class="active">PRESENT</span><span data-lang="ru">СЕЙЧАС</span></div>
+        <div class="tl-company">Exority Studio</div>
+      </div>
+      <div>
+        <div class="tl-role">Founder & CEO</div>
+        <div class="tl-body">
+          <span data-lang="en" class="active">Running Exority alongside my day job. We build AI automation systems and web products for businesses — the kind of infrastructure that replaces five manual steps with one reliable one. I handle everything from scoping the problem to shipping the solution: architecture decisions, client communication, and making sure what we promise actually works in production</span>
+          <span data-lang="ru">Развиваю Exority параллельно с основной работой. Строим AI-системы автоматизации и веб-продукты для бизнеса — инфраструктуру, которая заменяет пять ручных шагов одним надёжным. Занимаюсь всем: от формулировки задачи до деплоя решения. Архитектурные решения, коммуникация с клиентами и гарантия того, что обещанное работает в продакшне</span>
+        </div>
+        <div class="tl-tags"><span class="tag">AI Agents</span><span class="tag">Automation</span><span class="tag">SaaS</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div>
+        <div class="tl-date">APR – OCT 2025</div>
+        <div class="tl-company">Optom.uz</div>
+      </div>
+      <div>
+        <div class="tl-role">Product & Engineering Coordinator</div>
+        <div class="tl-body">
+          <span data-lang="en" class="active">Sat between the business side and the dev team on a B2B marketplace, translating requirements that made sense to one into specs that made sense to the other. Supported the CTO in architecture discussions, participated in QA, and flagged risks before they reached production. Learned something that stuck: the most expensive bugs don't live in the code — they live in requirements nobody questioned</span>
+          <span data-lang="ru">Находился между бизнесом и командой разработки на B2B-маркетплейсе, переводил то, что понятно одним, в то, что понятно другим. Участвовал в архитектурных обсуждениях рядом с CTO, в QA и выявлении рисков до выхода в прод. Вынес один вывод, который остался: самые дорогие баги не в коде — они в требованиях, которые никто не поставил под сомнение</span>
+        </div>
+        <div class="tl-tags"><span class="tag">C#</span><span class="tag">Python</span><span class="tag">System Analysis</span><span class="tag">Architecture</span></div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div>
+        <div class="tl-date">NOV 2024 – MAR 2025</div>
+        <div class="tl-company">Enter Co</div>
+      </div>
+      <div>
+        <div class="tl-role">C# Developer / Integration Engineer</div>
+        <div class="tl-body">
+          <span data-lang="en" class="active">Backend integrations with iiko — a large-scale restaurant management and POS platform. Worked with iiko Card API and Transport API to handle orders, customer data, and transaction flows across distributed systems. The most meaningful thing I shipped here was a bearer token auto-refresh plugin: auth sessions were silently dying mid-operation in production, causing real financial losses for the business. I diagnosed the failure pattern, designed the fix, and it held up</span>
+          <span data-lang="ru">Бэкенд-интеграции с iiko — крупной ресторанной POS-платформой. Работал с iiko Card API и Transport API: заказы, данные клиентов, транзакционные потоки между распределёнными системами. Главное, что зашипал: плагин автообновления Bearer-токена. Auth-сессии тихо падали посреди операций в продакшне, бизнес терял деньги. Я диагностировал паттерн сбоев, спроектировал решение — оно выдержало</span>
+        </div>
+        <div class="tl-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">REST</span><span class="tag">iiko API</span><span class="tag">Auth Flows</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">// 03 — <span data-lang="en" class="active">ABOUT</span><span data-lang="ru">ОБО МНЕ</span></div>
+  <div class="bento reveal">
+
+    <div class="bento-c wide">
+      <div class="bento-label"><span data-lang="en" class="active">IDENTITY</span><span data-lang="ru">ЛИЧНОСТЬ</span></div>
+      <h2 class="bento-h">
+        <span data-lang="en" class="active">Logic is my foundation<br><span style="color:var(--accent)">Action</span> is my default</span>
+        <span data-lang="ru">Логика — мой фундамент<br><span style="color:var(--accent)">Действие </span> — мой стандарт</span>
+      </h2>
+      <div class="bento-body">
+        <p>
+          <span data-lang="en" class="active">I'm Artur — a 17-year-old backend and integration engineer from Tashkent, Uzbekistan</span>
+          <span data-lang="ru">17-летний backend и интеграционный инженер из Ташкента</span>
+        </p>
+        <p>
+          <span data-lang="en" class="active">I started coding on my own during school and quickly realized I care less about writing code and more about building systems — ones that handle real load, survive edge cases, and don't fall apart six months into production</span>
+          <span data-lang="ru">Я начал программировать самостоятельно еще в школе и быстро осознал: меня меньше заботит написание кода и больше — проектирование систем. Тех, что выдерживают реальную нагрузку, переживают пограничные сценарии и не разваливаются через полгода в продакшене</span>
+        </p>
+        <p>
+          <span data-lang="en" class="active">Currently: working as a backend developer, solving LeetCode daily (400+ days streak), and preparing to study Computer Science in Europe</span>
+          <span data-lang="ru">В данный момент: работаю backend-разработчиком, ежедневно решаю LeetCode (стрик 400+ дней) и готовлюсь к изучению Computer Science в Европе</span>
+        </p>
+		<p>
+          <span data-lang="en" class="active">I'm not waiting for life to start. I'm building it now</span>
+          <span data-lang="ru">Я не жду, когда жизнь начнется. Я создаю ее прямо сейчас</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="bento-c">
+      <div class="bento-label">LEETCODE</div>
+      <div class="bento-num">1000<em>+</em></div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px">
+        <span data-lang="en" class="active">solved · top 11.83% globally</span>
+        <span data-lang="ru">решено · топ 11.83% в мире</span>
+      </div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted);line-height:2">
+        Easy 300+ · Med 600+ · Hard 200+<br>
+        <span data-lang="en" class="active">365-day streak · 23 badges</span>
+        <span data-lang="ru">стрик 365 дней · 23 бейджа</span>
+      </div>
+    </div>
+
+    <div class="bento-c">
+      <div class="bento-label"><span data-lang="en" class="active">SKILLS</span><span data-lang="ru">НАВЫКИ</span></div>
+      <div class="skill-row"><span class="skill-name">C# / .NET</span><div class="skill-track"><div class="skill-fill" data-w="87%"></div></div><span class="skill-pct">87%</span></div>
+      <div class="skill-row"><span class="skill-name">Python</span><div class="skill-track"><div class="skill-fill" data-w="74%"></div></div><span class="skill-pct">74%</span></div>
+      <div class="skill-row"><span class="skill-name">JavaScript</span><div class="skill-track"><div class="skill-fill" data-w="70%"></div></div><span class="skill-pct">70%</span></div>
+      <div class="skill-row"><span class="skill-name">AI / LLMs</span><div class="skill-track"><div class="skill-fill" data-w="68%"></div></div><span class="skill-pct">68%</span></div>
+      <div class="skill-row"><span class="skill-name">Unity / VR</span><div class="skill-track"><div class="skill-fill" data-w="63%"></div></div><span class="skill-pct">63%</span></div>
+    </div>
+
+    <div class="bento-c">
+      <div class="bento-label">STACK</div>
+      <div class="bento-body" style="line-height:2.1">C# · .NET · Python · Django · Go<br>JS · TS · React · Next.js<br>PostgreSQL · MySQL · Redis · MongoDB<br>Docker · AWS · RabbitMQ<br>Unity · REST · GitHub</div>
+    </div>
+
+    <div class="bento-c wide">
+      <div class="bento-label"><span data-lang="en" class="active">HACKATHONS & CERTIFICATIONS</span><span data-lang="ru">ХАКАТОНЫ И СЕРТИФИКАТЫ</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:4px">
+        <div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:8px">HACKATHONS</div>
+          <div class="bento-body">HackUnion 2025 — Team Lead & Full-Stack Dev<br>Innovative AI Hackathon 2025 — Team Lead & Backend</div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:8px">CERTIFICATIONS</div>
+          <div class="bento-body">IBM SkillsBuild — Data Fundamentals<br>AWS Cloud Practitioner Essentials<br>LinkedIn — Career Skills in Data Analytics</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="sec-label">// 04 — <span data-lang="en" class="active">PHOTOS</span><span data-lang="ru">ФОТО</span></div>
+
+  <!--
+  ══════════════════════════════════════════════════
+  КАК ДОБАВИТЬ ФОТКИ:
+  1. Создай папку: C:\Projects\portfolio\public\photos\
+  2. Закинь файлы с такими именами:
+       community.jpg  — коммьюнити / мероприятие (широкое)
+       solo1.jpg      — ты один
+       friends1.jpg   — с друзьями
+       biennial.jpg   — Bukhara Biennial
+       solo2.jpg      — ещё портрет
+       friends2.jpg   — с друзьями 2
+       team.jpg       — командное фото (широкое)
+  3. Поменяй g-caption на свои подписи если нужно
+  ══════════════════════════════════════════════════
+  -->
+
+  <!--
+  КАК ДОБАВИТЬ ФОТКИ:
+  Папка: C:\Projects\portfolio\public\photos\
+  Имена файлов: community.jpg, solo1.jpg, friends1.jpg,
+                biennial.jpg, solo2.jpg, friends2.jpg, team.jpg
+  Фотки отображаются в полный рост (вертикальные не обрезаются).
+  Порядок колонок: лево → право → лево → ...
+  -->
+
+  <div class="gallery-masonry reveal">
+
+    <!-- Колонка 1: вертикальные / портреты -->
+    <div class="gallery-item">
+      <img src="/photos/solo1.png" alt="Artur" loading="lazy">
+      <div class="g-overlay"><span class="g-caption"></span></div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="/photos/friends1.jpg" alt="Friends" loading="lazy">
+      <div class="g-overlay"><span class="g-caption"></span></div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="/photos/solo2.jpg" alt="Artur" loading="lazy">
+      <div class="g-overlay"><span class="g-caption"></span></div>
+    </div>
+
+    <!-- Колонка 2: горизонтальные / групповые -->
+    <div class="gallery-item">
+      <img src="/photos/community.jpg" alt="Community" loading="lazy">
+      <div class="g-overlay"><span class="g-caption"></span></div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="/photos/biennial.jpg" alt="Bukhara Biennial" loading="lazy">
+      <div class="g-overlay"><span class="g-caption"></span></div>
+    </div>
+
+    <!-- Колонка 3 -->
+    <div class="gallery-item">
+      <img src="/photos/friends2.jpg" alt="Friends" loading="lazy">
+      <div class="g-overlay"><span class="g-caption"></span></div>
+    </div>
+
+    <div class="gallery-item">
+      <img src="/photos/team.png" alt="Team" loading="lazy">
+      <div class="g-overlay"><span class="g-caption"></span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+  <div class="sec-label">// 05 — <span data-lang="en" class="active">MUSIC</span><span data-lang="ru">МУЗЫКА</span></div>
+  <div class="music-wrap reveal">
+
+    <div class="tracks-side">
+      <div class="tracks-label">FLOW PLAYLIST</div>
+      <p class="tracks-sub">
+        <span data-lang="en" class="active">Tracks I keep coming back to. Click any — plays from the exact timestamp</span>
+        <span data-lang="ru">Треки, к которым возвращаюсь. Кликни — начнёт с нужного момента</span>
+      </p>
+      <div class="tracks-list">
+
+        <div class="s-track active-track" data-id="11gTRcdz4wK32fghA2vrX7" data-t="24">
+          <span class="s-num">01</span>
+          <div class="s-info">
+            <div class="s-name">Lost Angeles</div>
+            <div class="s-artist">FRIENDLY THUG 52 NGG</div>
+          </div>
+          <span class="s-time">0:24</span>
+          <div class="s-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        </div>
+
+        <div class="s-track" data-id="325ZSqJnyHg6SNUQQZamVb" data-t="146">
+          <span class="s-num">02</span>
+          <div class="s-info">
+            <div class="s-name">Celestica</div>
+            <div class="s-artist">Crystal Castles</div>
+          </div>
+          <span class="s-time">2:26</span>
+          <div class="s-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        </div>
+
+        <div class="s-track" data-id="1eIyd3NoPC9bT4sBMDfNRL" data-t="127">
+          <span class="s-num">03</span>
+          <div class="s-info">
+            <div class="s-name">damage</div>
+            <div class="s-artist">Kai Angel</div>
+          </div>
+          <span class="s-time">2:07</span>
+          <div class="s-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        </div>
+
+        <div class="s-track" data-id="2I1U3KprLoFm8NUxHvI9Mr" data-t="90">
+          <span class="s-num">04</span>
+          <div class="s-info">
+            <div class="s-name">Сон</div>
+            <div class="s-artist">Mirèle, Peremotka</div>
+          </div>
+          <span class="s-time">1:30</span>
+          <div class="s-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        </div>
+
+        <div class="s-track" data-id="3VieScqwrczxcSVTsH20gu" data-t="65">
+          <span class="s-num">05</span>
+          <div class="s-info">
+            <div class="s-name">AIST</div>
+            <div class="s-artist">FRIENDLY THUG 52 NGG</div>
+          </div>
+          <span class="s-time">1:05</span>
+          <div class="s-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        </div>
+
+        <div class="s-track" data-id="73ZlmJxexVebFozgZhEhkd" data-t="300">
+          <span class="s-num">06</span>
+          <div class="s-info">
+            <div class="s-name">O Children</div>
+            <div class="s-artist">Nick Cave & The Bad Seeds</div>
+          </div>
+          <span class="s-time">5:00</span>
+          <div class="s-play"><svg viewBox="0 0 10 10"><polygon points="2,1 9,5 2,9"/></svg></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- iframe — src меняется по клику -->
+    <div class="spotify-iframe-side">
+      <iframe id="sp-player"
+        src="https://open.spotify.com/embed/track/11gTRcdz4wK32fghA2vrX7?t=24&utm_source=generator&theme=0"
+        width="100%" height="100%"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        style="border:none;display:block;min-height:160px">
+      </iframe>
+    </div>
+
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section id="articles">
+  <div class="sec-label">// 06 — <span data-lang="en" class="active">WRITING</span><span data-lang="ru">СТАТЬИ</span></div>
+  <div class="articles-grid reveal">
+    <div class="art-c">
+      <div class="art-tag">MEDIUM · 2026 · SYSTEMS THINKING</div>
+      <h3 class="art-title">
+        <span data-lang="en" class="active">Why Technical Skills Alone Are Not Enough</span>
+        <span data-lang="ru">Почему технических навыков недостаточно</span>
+      </h3>
+      <p class="art-body">
+        <span data-lang="en" class="active">Technical skills get you in the door, but they don't keep you there. This piece argues for systems thinking as the missing layer — drawing from real project experience, not theory</span>
+        <span data-lang="ru">Технические навыки открывают дверь, но не удерживают тебя за ней. Статья о системном мышлении как недостающем слое — из реального опыта проектов, не из теории</span>
+      </p>
+      <a href="https://medium.com/@arturpodchayev/why-technical-skills-alone-are-not-enough-the-role-of-systems-thinking-in-technology-19aa7206fd44" class="art-link" target="_blank" rel="noopener">
+        <span data-lang="en" class="active">READ ON MEDIUM ↗</span>
+        <span data-lang="ru">ЧИТАТЬ НА MEDIUM ↗</span>
+      </a>
+    </div>
+    <div class="art-c">
+      <div class="art-tag">MEDIUM · 2025 · FUTURE OF ENGINEERING</div>
+      <h3 class="art-title">
+        <span data-lang="en" class="active">What Will It Mean to Be a Software Engineer by 2030?</span>
+        <span data-lang="ru">Что значит быть инженером к 2030 году?</span>
+      </h3>
+      <p class="art-body">
+        <span data-lang="en" class="active">The tools keep changing. What doesn't change is the responsibility to understand what you're building and why. A look at where the role is actually heading — beyond the AI hype</span>
+        <span data-lang="ru">Инструменты постоянно меняются. Неизменным остаётся одно — ответственность понимать, что и зачем ты строишь. Взгляд на то, куда на самом деле движется профессия — за пределами AI-хайпа</span>
+      </p>
+      <a href="https://medium.com/@arturpodchayev/what-will-it-mean-to-be-a-software-engineer-by-2030-0a4df44345dd" class="art-link" target="_blank" rel="noopener">
+        <span data-lang="en" class="active">READ ON MEDIUM ↗</span>
+        <span data-lang="ru">ЧИТАТЬ НА MEDIUM ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="foot-copy">© 2026 ARTUR PODCHAEV // ALL SYSTEMS OPERATIONAL</div>
+  <div class="foot-links">
+    <a href="https://github.com/ArturPodchayev" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/arturpodchayev" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://t.me/Artur_IT_developer" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://exority-studio.uz/" target="_blank" rel="noopener">Exority</a>
+    <a href="https://leetcode.com/u/Artur_648/" target="_blank" rel="noopener">LeetCode</a>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function a(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
+document.querySelectorAll('a,button,.proj-c,.stat-c,.bento-c,.art-c,.tl-item,.gallery-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='14px';cur.style.height='14px';ring.style.width='44px';ring.style.height='44px'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='30px';ring.style.height='30px'});
+});
+
+// Language switcher — EN default
+let lang='en';
+document.querySelectorAll('.lang-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const l=btn.dataset.switch;
+    if(l===lang)return;
+    lang=l;
+    document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.switch===l));
+    document.querySelectorAll('[data-lang]').forEach(el=>el.classList.toggle('active',el.dataset.lang===l));
+    document.querySelectorAll('.en-line').forEach(el=>el.style.display=l==='en'?'block':'none');
+    document.querySelectorAll('.ru-line').forEach(el=>el.style.display=l==='ru'?'block':'none');
+  });
+});
+
+// Marquee
+const items=['C# / .NET','Python','AI Agents','Unity VR','Algorithms','Full-Stack','Automation','LeetCode 1000+','Tashkent, UZ','Exority Studio','Systems Thinking','Open to Work'];
+const track=document.getElementById('mqt');
+track.innerHTML=(items.map(i=>`<span class="mq-item">${i}<span class="d">◆</span></span>`).join('')).repeat(2);
+
+// Track player — click switches iframe src with timestamp
+  document.querySelectorAll('.s-track').forEach(track => {
+    track.addEventListener('click', () => {
+      const id = track.dataset.id;
+      const t  = track.dataset.t;
+      document.querySelectorAll('.s-track').forEach(t => t.classList.remove('active-track'));
+      track.classList.add('active-track');
+      document.getElementById('sp-player').src =
+        `https://open.spotify.com/embed/track/${id}?t=${t}&utm_source=generator&theme=0`;
+    });
+  });
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      e.target.querySelectorAll('.skill-fill').forEach(b=>setTimeout(()=>b.style.width=b.dataset.w,200));
+    }
+  });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
 </html>
