@@ -232,6 +232,49 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
 .reveal.in{opacity:1;transform:none}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  body{cursor:auto}
+  #cur,#cur-r{display:none}
+
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .nav-dot span{display:none}
+  .nav-right{gap:10px}
+
+  .hero{padding:120px 20px 80px}
+  .hero-coords{font-size:10px;margin-bottom:20px}
+  .hero-bottom{flex-direction:column;align-items:flex-start;gap:24px}
+  .hero-actions{flex-direction:column;width:100%}
+  .btn-p,.btn-o{width:100%;justify-content:center}
+  .scroll-hint{left:20px}
+
+  section{padding:56px 20px}
+
+  .stats-band{grid-template-columns:1fr 1fr}
+
+  .proj-grid{grid-template-columns:1fr}
+  .proj-c.feat{grid-column:span 1;grid-template-columns:1fr;gap:0}
+  .proj-vis{height:200px}
+
+  .tl-item{grid-template-columns:1fr;gap:8px}
+  .tl-item::before{display:none}
+  .tl-date{margin-bottom:2px}
+
+  .bento{grid-template-columns:1fr}
+  .bento-c.wide{grid-column:span 1}
+
+  .gallery-masonry{columns:2;column-gap:1px}
+
+  .music-wrap{grid-template-columns:1fr}
+  .spotify-iframe-side{min-height:200px}
+
+  .articles-grid{grid-template-columns:1fr}
+
+  footer{flex-direction:column;gap:20px;padding:28px 20px;text-align:center}
+  .foot-links{flex-wrap:wrap;justify-content:center;gap:16px}
+}
 </style>
 </head>
 <body>
@@ -272,21 +315,20 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
   <div class="hero-coords">41.2995° N, 69.2401° E // TASHKENT, UZ // SYSTEM ONLINE</div>
   <div class="hero-tag">
     <span>◆</span>
-    <span data-lang="en" class="active">FULL-STACK ENGINEER · AI SYSTEMS · PRODUCT MANAGER</span>
-    <span data-lang="ru">FULL-STACK · AI СИСТЕМЫ · ПРОДУКТ МЭНЕДЖЕР</span>
+    <span data-lang="en" class="active">FULL-STACK ENGINEER · AI SYSTEMS · PRODUCT BUILDER</span>
+    <span data-lang="ru">FULL-STACK · AI СИСТЕМЫ · ПРОДУКТОВЫЙ СТРОИТЕЛЬ</span>
   </div>
   <h1 class="hero-h">
     <span class="line en-line">I build systems</span>
     <span class="line ru-line" style="display:none">Я строю системы,</span>
     <span class="line outline en-line">that actually</span>
     <span class="line outline ru-line" style="display:none">которые реально</span>
-    <span class="line en-line teal">ship</span>
-	<span class="line ru-line teal" style="display:none">работают</span>
+    <span class="line teal">ship.</span>
   </h1>
   <div class="hero-bottom">
     <p class="hero-desc">
-      <span data-lang="en" class="active">Backend engineer and product builder from Tashkent. I design systems that hold up in production — REST APIs, AI pipelines, VR simulations, real integrations. 1000+ LeetCode problems. 365-day streak. Building at Insight and running Exority Studio</span>
-      <span data-lang="ru">Бэкенд-инженер из Ташкента. Строю системы, которые работают в продакшне — API, AI-пайплайны, VR-симуляции. 1000+ задач на LeetCode, стрик 365 дней. Работаю в Insight, развиваю Exority Studio</span>
+      <span data-lang="en" class="active">Backend engineer and product builder from Tashkent. I design systems that hold up in production — REST APIs, AI pipelines, VR simulations, real integrations. 1146 LeetCode problems. 365-day streak. Building at Insight and running Exority Studio.</span>
+      <span data-lang="ru">Бэкенд-инженер из Ташкента. Строю системы, которые работают в продакшне — API, AI-пайплайны, VR-симуляции. 1146 задач на LeetCode, стрик 365 дней. Работаю в Insight, развиваю Exority Studio.</span>
     </p>
     <div class="hero-actions">
       <a href="#projects" class="btn-p">
@@ -313,7 +355,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 <section style="padding:60px 48px;border-top:1px solid var(--border)">
   <div class="stats-band reveal">
     <div class="stat-c">
-      <div class="stat-n">1000<em>+</em></div>
+      <div class="stat-n">1146<em>+</em></div>
       <div class="stat-l"><span data-lang="en" class="active">leetcode solved</span><span data-lang="ru">задач решено</span></div>
     </div>
     <div class="stat-c">
@@ -348,8 +390,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
         <div class="proj-num">001 // FEATURED — LEAD DEVELOPER</div>
         <h3 class="proj-title">VR Chemistry Laboratory</h3>
         <p class="proj-desc">
-          <span data-lang="en" class="active">Built a full VR chemistry lab from scratch — technical specs, Unity MVP, reaction logic for salts and oxides in C#. The core challenge was an architecture flexible enough to add new reactions without breaking anything</span>
-          <span data-lang="ru">Разработал VR-симуляцию химической лаборатории с нуля — от ТЗ до MVP в Unity. Логика реакций солей и оксидов на C#. Главный вызов — архитектура, в которую можно добавлять новые реакции, не ломая старые</span>
+          <span data-lang="en" class="active">Built a full VR chemistry lab from scratch — wrote the technical specs, developed the MVP in Unity, and implemented reaction logic for salts and oxides in C#. The core challenge was designing an architecture flexible enough to add new reaction combinations without breaking anything.</span>
+          <span data-lang="ru">Разработал VR-симуляцию хим. лаборатории с нуля — написал ТЗ, создал MVP в Unity, реализовал логику реакций солей и оксидов на C#. Главный вызов — архитектура, которая позволяет добавлять новые реакции без поломок.</span>
         </p>
         <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">VR</span><span class="tag">Physics Engine</span><span class="tag">UX Design</span></div>
         <span class="proj-arrow">↗</span>
@@ -360,8 +402,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div class="proj-num">002 // OPERATIONS</div>
       <h3 class="proj-title">Bukhara Biennial</h3>
       <p class="proj-desc">
-        <span data-lang="en" class="active">Technical link between international artists from 30+ countries and local construction teams. Turned abstract concepts into concrete instructions, managed equipment logistics from Tashkent, kept installations on schedule under real pressure</span>
-        <span data-lang="ru">Технический медиатор между художниками из 30+ стран и местными строителями. Переводил абстрактные концепции в конкретные инструкции, управлял логистикой оборудования и сроками монтажа в условиях реального давления</span>
+        <span data-lang="en" class="active">Worked as the technical link between international artists from 30+ countries and local construction teams. Turned abstract artistic concepts into concrete instructions, managed equipment logistics from Tashkent, and kept installations on schedule under real pressure.</span>
+        <span data-lang="ru">Технический медиатор между художниками из 30+ стран и местными командами. Переводил абстрактные концепции в конкретные инструкции, управлял логистикой оборудования из Ташкента и следил за сроками монтажа.</span>
       </p>
       <div class="tags"><span class="tag">International Ops</span><span class="tag">Logistics</span><span class="tag">Technical Translation</span></div>
       <a href="https://www.bukharabiennial.uz/" class="proj-arrow" target="_blank" rel="noopener">↗</a>
@@ -371,8 +413,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div class="proj-num">003 // FOUNDER</div>
       <h3 class="proj-title">Exority Studio</h3>
       <p class="proj-desc">
-        <span data-lang="en" class="active">A studio I run that builds AI tools and automation systems for businesses. The pitch is simple: replace slow manual processes with infrastructure that actually scales — AI agents, CRM integrations, Telegram bots, custom SaaS etc.</span>
-        <span data-lang="ru">Студия, которую я основал, — строим AI-инструменты и системы автоматизации для бизнеса. Заменяем медленные ручные процессы инфраструктурой, которая масштабируется: AI-агенты, CRM, Telegram-боты, SaaS и многое другое</span>
+        <span data-lang="en" class="active">A studio I run that builds AI tools and automation systems for businesses. The pitch is simple: replace slow manual processes with infrastructure that actually scales — AI agents, CRM integrations, Telegram bots, custom SaaS.</span>
+        <span data-lang="ru">Студия, которую я основал, — строим AI-инструменты и системы автоматизации для бизнеса. Заменяем медленные ручные процессы инфраструктурой, которая масштабируется: AI-агенты, CRM, Telegram-боты, SaaS.</span>
       </p>
       <div class="tags"><span class="tag">AI Agents</span><span class="tag">Automation</span><span class="tag">SaaS</span><span class="tag">Founder</span></div>
       <a href="https://exority-studio.uz/" class="proj-arrow" target="_blank" rel="noopener">↗</a>
@@ -382,8 +424,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div class="proj-num">004 // COLLABORATIVE MVP</div>
       <h3 class="proj-title">Gym-AI</h3>
       <p class="proj-desc">
-        <span data-lang="en" class="active">I joined a team that was creating a fitness app with artificial intelligence and computer vision at an early stage. I took a product idea and turned it into an MVP with a clear, realistic interaction process that will be implemented in practice. Soon</span>
-        <span data-lang="ru">Присоединился к команде, которая на ранней стадии создавала фитнес-приложение с искусственным интеллектом и компьютерным зрением. Взял идею продукта и превратил ее в MVP с четким, реалистичным процессом взаимодействия, которая будет реализован на практике. Скоро</span>
+        <span data-lang="en" class="active">Joined an early-stage team building an AI fitness app with computer vision for movement analysis. My job was to take a wide-open product idea and shape it into an MVP with a clear, realistic interaction flow that could actually ship.</span>
+        <span data-lang="ru">Присоединился к команде на ранней стадии — AI-фитнес-приложение с компьютерным зрением. Взял широкую идею и сформировал из неё MVP с чёткой логикой взаимодействия, которую реально можно зашипать.</span>
       </p>
       <div class="tags"><span class="tag">AI</span><span class="tag">Computer Vision</span><span class="tag">Product</span><span class="tag">UX</span></div>
       <a href="https://github.com/albert-ios/Gym-AI" class="proj-arrow" target="_blank" rel="noopener">↗</a>
@@ -393,8 +435,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div class="proj-num">005 // CO-FOUNDER</div>
       <h3 class="proj-title">Youth Data Club</h3>
       <p class="proj-desc">
-        <span data-lang="en" class="active">Co-founded a student community in Tashkent for people who wanted to go deeper into data science than school allows. Built the learning structure, ran technical meetups, and grew a group of people who actually showed up consistently</span>
-        <span data-lang="ru">Сооснователь студенческого сообщества в Ташкенте — для тех, кто хочет глубже в Data Science, чем позволяет школа. Выстроил структуру обучения, проводил митапы, собрал команду постоянных участников</span>
+        <span data-lang="en" class="active">Co-founded a student community in Tashkent for people who wanted to go deeper into data science than school allows. Built the learning structure, ran technical meetups, and grew a group of people who actually showed up consistently.</span>
+        <span data-lang="ru">Сооснователь студенческого сообщества в Ташкенте — для тех, кто хочет глубже в Data Science, чем позволяет школа. Выстроил структуру обучения, проводил митапы, собрал команду постоянных участников.</span>
       </p>
       <div class="tags"><span class="tag">Community</span><span class="tag">Data Science</span><span class="tag">Leadership</span></div>
       <a href="https://t.me/youthdataclub_uz" class="proj-arrow" target="_blank" rel="noopener">↗</a>
@@ -416,8 +458,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div>
         <div class="tl-role">C# Developer</div>
         <div class="tl-body">
-          <span data-lang="en" class="active">Microservices for a survey platform built on .NET and PostgreSQL. The architecture is event-driven — RabbitMQ and NATS handle messaging between services, which means understanding the full flow before touching anything. Currently deep in the survey engine itself: rule-based branching logic, dynamic question trees, and making sure edge cases don't silently corrupt data. Every feature goes through the question — what happens when something upstream changes? I write code that anticipates that</span>
-          <span data-lang="ru">Микросервисы для платформы опросов на .NET и PostgreSQL. Архитектура event-driven — RabbitMQ и NATS между сервисами, что значит: прежде чем что-то трогать, нужно понять весь поток целиком. Сейчас глубоко в движке опросов: rule-based логика ветвления, динамические деревья вопросов, обработка граничных случаев без тихой порчи данных. Каждая фича проходит через вопрос — что сломается, если что-то изменится выше по цепочке? Пишу код, который это предусматривает</span>
+          <span data-lang="en" class="active">Working on microservices for a survey platform — .NET backend, PostgreSQL, event-driven messaging via RabbitMQ and NATS. Currently deep in the survey engine: rule-based logic, dynamic branching, making sure edge cases don't silently break things.</span>
+          <span data-lang="ru">Разрабатываю микросервисы для платформы опросов — .NET, PostgreSQL, event-driven через RabbitMQ и NATS. Сейчас глубоко в движке опросов: rule-based логика, динамическое ветвление, отлов граничных случаев.</span>
         </div>
         <div class="tl-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">PostgreSQL</span><span class="tag">RabbitMQ</span><span class="tag">REST API</span></div>
       </div>
@@ -431,8 +473,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div>
         <div class="tl-role">Founder & CEO</div>
         <div class="tl-body">
-          <span data-lang="en" class="active">Running Exority alongside my day job. We build AI automation systems and web products for businesses — the kind of infrastructure that replaces five manual steps with one reliable one. I handle everything from scoping the problem to shipping the solution: architecture decisions, client communication, and making sure what we promise actually works in production</span>
-          <span data-lang="ru">Развиваю Exority параллельно с основной работой. Строим AI-системы автоматизации и веб-продукты для бизнеса — инфраструктуру, которая заменяет пять ручных шагов одним надёжным. Занимаюсь всем: от формулировки задачи до деплоя решения. Архитектурные решения, коммуникация с клиентами и гарантия того, что обещанное работает в продакшне</span>
+          <span data-lang="en" class="active">Running Exority alongside my day job. We build AI automation systems and web products for businesses — the kind of infrastructure that replaces five manual steps with one reliable one.</span>
+          <span data-lang="ru">Развиваю Exority параллельно с основной работой. Строим AI-системы и веб-продукты для бизнеса — инфраструктуру, которая заменяет пять ручных шагов одним надёжным.</span>
         </div>
         <div class="tl-tags"><span class="tag">AI Agents</span><span class="tag">Automation</span><span class="tag">SaaS</span></div>
       </div>
@@ -446,8 +488,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div>
         <div class="tl-role">Product & Engineering Coordinator</div>
         <div class="tl-body">
-          <span data-lang="en" class="active">Sat between the business side and the dev team on a B2B marketplace, translating requirements that made sense to one into specs that made sense to the other. Supported the CTO in architecture discussions, participated in QA, and flagged risks before they reached production. Learned something that stuck: the most expensive bugs don't live in the code — they live in requirements nobody questioned</span>
-          <span data-lang="ru">Находился между бизнесом и командой разработки на B2B-маркетплейсе, переводил то, что понятно одним, в то, что понятно другим. Участвовал в архитектурных обсуждениях рядом с CTO, в QA и выявлении рисков до выхода в прод. Вынес один вывод, который остался: самые дорогие баги не в коде — они в требованиях, которые никто не поставил под сомнение</span>
+          <span data-lang="en" class="active">Sat between the business side and the dev team on a B2B marketplace, translating requirements that made sense to one into specs that made sense to the other. Learned early that the most expensive bugs live in misunderstood requirements — not in the code.</span>
+          <span data-lang="ru">Был между бизнесом и разработчиками на B2B-маркетплейсе: переводил то, что понятно одним, в то, что понятно другим. Быстро понял: самые дорогие баги живут в непонятых требованиях, а не в коде.</span>
         </div>
         <div class="tl-tags"><span class="tag">C#</span><span class="tag">Python</span><span class="tag">System Analysis</span><span class="tag">Architecture</span></div>
       </div>
@@ -461,8 +503,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div>
         <div class="tl-role">C# Developer / Integration Engineer</div>
         <div class="tl-body">
-          <span data-lang="en" class="active">Backend integrations with iiko — a large-scale restaurant management and POS platform. Worked with iiko Card API and Transport API to handle orders, customer data, and transaction flows across distributed systems. The most meaningful thing I shipped here was a bearer token auto-refresh plugin: auth sessions were silently dying mid-operation in production, causing real financial losses for the business. I diagnosed the failure pattern, designed the fix, and it held up</span>
-          <span data-lang="ru">Бэкенд-интеграции с iiko — крупной ресторанной POS-платформой. Работал с iiko Card API и Transport API: заказы, данные клиентов, транзакционные потоки между распределёнными системами. Главное, что зашипал: плагин автообновления Bearer-токена. Auth-сессии тихо падали посреди операций в продакшне, бизнес терял деньги. Я диагностировал паттерн сбоев, спроектировал решение — оно выдержало</span>
+          <span data-lang="en" class="active">Built integrations with iiko — a large-scale restaurant management platform. The most meaningful thing I shipped here was a bearer token auto-refresh plugin that stopped auth sessions from quietly dying mid-operation in production.</span>
+          <span data-lang="ru">Интеграции с iiko — крупной ресторанной POS-системой. Главное, что зашипал: плагин автообновления Bearer-токена, который перестал роняться auth-сессиям прямо в середине операции в продакшне.</span>
         </div>
         <div class="tl-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">REST</span><span class="tag">iiko API</span><span class="tag">Auth Flows</span></div>
       </div>
@@ -479,38 +521,34 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
     <div class="bento-c wide">
       <div class="bento-label"><span data-lang="en" class="active">IDENTITY</span><span data-lang="ru">ЛИЧНОСТЬ</span></div>
       <h2 class="bento-h">
-        <span data-lang="en" class="active">Logic is my foundation<br><span style="color:var(--accent)">Action</span> is my default</span>
-        <span data-lang="ru">Логика — мой фундамент<br><span style="color:var(--accent)">Действие </span> — мой стандарт</span>
+        <span data-lang="en" class="active">Engineer by logic.<br><span style="color:var(--accent)">Builder</span> by default.</span>
+        <span data-lang="ru">Инженер по логике.<br><span style="color:var(--accent)">Строитель</span> по призванию.</span>
       </h2>
       <div class="bento-body">
         <p>
-          <span data-lang="en" class="active">I'm Artur — a 17-year-old backend and integration engineer from Tashkent, Uzbekistan</span>
-          <span data-lang="ru">17-летний backend и интеграционный инженер из Ташкента</span>
+          <span data-lang="en" class="active">I'm Artur, 17, from Tashkent. I write production code, design systems, and ship things that actually hold up. Not side projects that never see users — real products with real constraints.</span>
+          <span data-lang="ru">Мне 17, я из Ташкента. Пишу продакшн-код, проектирую системы и шипаю то, что реально работает. Не сайд-проекты без пользователей — настоящие продукты с настоящими ограничениями.</span>
         </p>
         <p>
-          <span data-lang="en" class="active">I started coding on my own during school and quickly realized I care less about writing code and more about building systems — ones that handle real load, survive edge cases, and don't fall apart six months into production</span>
-          <span data-lang="ru">Я начал программировать самостоятельно еще в школе и быстро осознал: меня меньше заботит написание кода и больше — проектирование систем. Тех, что выдерживают реальную нагрузку, переживают пограничные сценарии и не разваливаются через полгода в продакшене</span>
+          <span data-lang="en" class="active">My focus is backend and AI — building infrastructure that's predictable, maintainable, and fast to iterate on. I think about how services talk to each other before I write a single line.</span>
+          <span data-lang="ru">Фокус — бэкенд и AI: инфраструктура, которая предсказуема, поддерживаема и быстро итерируется. Думаю о том, как сервисы общаются между собой, прежде чем написать строку кода.</span>
         </p>
         <p>
-          <span data-lang="en" class="active">Currently: working as a backend developer, solving LeetCode daily (400+ days streak), and preparing to study Computer Science in Europe</span>
-          <span data-lang="ru">В данный момент: работаю backend-разработчиком, ежедневно решаю LeetCode (стрик 400+ дней) и готовлюсь к изучению Computer Science в Европе</span>
-        </p>
-		<p>
-          <span data-lang="en" class="active">I'm not waiting for life to start. I'm building it now</span>
-          <span data-lang="ru">Я не жду, когда жизнь начнется. Я создаю ее прямо сейчас</span>
+          <span data-lang="en" class="active">Right now: C# at Insight · Founder of Exority Studio · Applying to CS programs in Europe.</span>
+          <span data-lang="ru">Сейчас: C# Developer в Insight · Основатель Exority Studio · Поступаю на CS в Европе.</span>
         </p>
       </div>
     </div>
 
     <div class="bento-c">
       <div class="bento-label">LEETCODE</div>
-      <div class="bento-num">1000<em>+</em></div>
+      <div class="bento-num">1146<em>+</em></div>
       <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px">
         <span data-lang="en" class="active">solved · top 11.83% globally</span>
         <span data-lang="ru">решено · топ 11.83% в мире</span>
       </div>
       <div style="font-family:var(--mono);font-size:11px;color:var(--muted);line-height:2">
-        Easy 300+ · Med 600+ · Hard 200+<br>
+        Easy 323 · Med 619 · Hard 204<br>
         <span data-lang="en" class="active">365-day streak · 23 badges</span>
         <span data-lang="ru">стрик 365 дней · 23 бейджа</span>
       </div>
@@ -518,11 +556,11 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 
     <div class="bento-c">
       <div class="bento-label"><span data-lang="en" class="active">SKILLS</span><span data-lang="ru">НАВЫКИ</span></div>
-      <div class="skill-row"><span class="skill-name">C# / .NET</span><div class="skill-track"><div class="skill-fill" data-w="87%"></div></div><span class="skill-pct">87%</span></div>
-      <div class="skill-row"><span class="skill-name">Python</span><div class="skill-track"><div class="skill-fill" data-w="74%"></div></div><span class="skill-pct">74%</span></div>
-      <div class="skill-row"><span class="skill-name">JavaScript</span><div class="skill-track"><div class="skill-fill" data-w="70%"></div></div><span class="skill-pct">70%</span></div>
-      <div class="skill-row"><span class="skill-name">AI / LLMs</span><div class="skill-track"><div class="skill-fill" data-w="68%"></div></div><span class="skill-pct">68%</span></div>
-      <div class="skill-row"><span class="skill-name">Unity / VR</span><div class="skill-track"><div class="skill-fill" data-w="63%"></div></div><span class="skill-pct">63%</span></div>
+      <div class="skill-row"><span class="skill-name">C# / .NET</span><div class="skill-track"><div class="skill-fill" data-w="82%"></div></div><span class="skill-pct">82%</span></div>
+      <div class="skill-row"><span class="skill-name">Python</span><div class="skill-track"><div class="skill-fill" data-w="79%"></div></div><span class="skill-pct">79%</span></div>
+      <div class="skill-row"><span class="skill-name">JavaScript</span><div class="skill-track"><div class="skill-fill" data-w="72%"></div></div><span class="skill-pct">72%</span></div>
+      <div class="skill-row"><span class="skill-name">AI / LLMs</span><div class="skill-track"><div class="skill-fill" data-w="70%"></div></div><span class="skill-pct">70%</span></div>
+      <div class="skill-row"><span class="skill-name">Unity / VR</span><div class="skill-track"><div class="skill-fill" data-w="65%"></div></div><span class="skill-pct">65%</span></div>
     </div>
 
     <div class="bento-c">
@@ -580,40 +618,40 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 
     <!-- Колонка 1: вертикальные / портреты -->
     <div class="gallery-item">
-      <img src="/photos/solo1.png" alt="Artur" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
+      <img src="/photos/solo1.jpg" alt="Artur" loading="lazy">
+      <div class="g-overlay"><span class="g-caption">ARTUR · TASHKENT</span></div>
     </div>
 
     <div class="gallery-item">
       <img src="/photos/friends1.jpg" alt="Friends" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
+      <div class="g-overlay"><span class="g-caption">FRIENDS · 2025</span></div>
     </div>
 
     <div class="gallery-item">
       <img src="/photos/solo2.jpg" alt="Artur" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
+      <div class="g-overlay"><span class="g-caption">ARTUR · 2026</span></div>
     </div>
 
     <!-- Колонка 2: горизонтальные / групповые -->
     <div class="gallery-item">
       <img src="/photos/community.jpg" alt="Community" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
+      <div class="g-overlay"><span class="g-caption">YOUTH DATA CLUB · 2025</span></div>
     </div>
 
     <div class="gallery-item">
       <img src="/photos/biennial.jpg" alt="Bukhara Biennial" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
+      <div class="g-overlay"><span class="g-caption">BUKHARA BIENNIAL · 2025</span></div>
     </div>
 
     <!-- Колонка 3 -->
     <div class="gallery-item">
       <img src="/photos/friends2.jpg" alt="Friends" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
+      <div class="g-overlay"><span class="g-caption">FRIENDS · 2025</span></div>
     </div>
 
     <div class="gallery-item">
-      <img src="/photos/team.png" alt="Team" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
+      <img src="/photos/team.jpg" alt="Team" loading="lazy">
+      <div class="g-overlay"><span class="g-caption">TEAM · TASHKENT</span></div>
     </div>
 
   </div>
@@ -627,8 +665,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
     <div class="tracks-side">
       <div class="tracks-label">FLOW PLAYLIST</div>
       <p class="tracks-sub">
-        <span data-lang="en" class="active">Tracks I keep coming back to. Click any — plays from the exact timestamp</span>
-        <span data-lang="ru">Треки, к которым возвращаюсь. Кликни — начнёт с нужного момента</span>
+        <span data-lang="en" class="active">Tracks I keep coming back to. Click any — plays from the exact timestamp.</span>
+        <span data-lang="ru">Треки, к которым возвращаюсь. Кликни — начнёт с нужного момента.</span>
       </p>
       <div class="tracks-list">
 
@@ -719,8 +757,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
         <span data-lang="ru">Почему технических навыков недостаточно</span>
       </h3>
       <p class="art-body">
-        <span data-lang="en" class="active">Technical skills get you in the door, but they don't keep you there. This piece argues for systems thinking as the missing layer — drawing from real project experience, not theory</span>
-        <span data-lang="ru">Технические навыки открывают дверь, но не удерживают тебя за ней. Статья о системном мышлении как недостающем слое — из реального опыта проектов, не из теории</span>
+        <span data-lang="en" class="active">Technical skills get you in the door, but they don't keep you there. This piece argues for systems thinking as the missing layer — drawing from real project experience, not theory.</span>
+        <span data-lang="ru">Технические навыки открывают дверь, но не удерживают тебя за ней. Статья о системном мышлении как недостающем слое — из реального опыта проектов, не из теории.</span>
       </p>
       <a href="https://medium.com/@arturpodchayev/why-technical-skills-alone-are-not-enough-the-role-of-systems-thinking-in-technology-19aa7206fd44" class="art-link" target="_blank" rel="noopener">
         <span data-lang="en" class="active">READ ON MEDIUM ↗</span>
@@ -734,8 +772,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
         <span data-lang="ru">Что значит быть инженером к 2030 году?</span>
       </h3>
       <p class="art-body">
-        <span data-lang="en" class="active">The tools keep changing. What doesn't change is the responsibility to understand what you're building and why. A look at where the role is actually heading — beyond the AI hype</span>
-        <span data-lang="ru">Инструменты постоянно меняются. Неизменным остаётся одно — ответственность понимать, что и зачем ты строишь. Взгляд на то, куда на самом деле движется профессия — за пределами AI-хайпа</span>
+        <span data-lang="en" class="active">The tools keep changing. What doesn't change is the responsibility to understand what you're building and why. A look at where the role is actually heading — beyond the AI hype.</span>
+        <span data-lang="ru">Инструменты постоянно меняются. Неизменным остаётся одно — ответственность понимать, что и зачем ты строишь. Взгляд на то, куда на самом деле движется профессия — за пределами AI-хайпа.</span>
       </p>
       <a href="https://medium.com/@arturpodchayev/what-will-it-mean-to-be-a-software-engineer-by-2030-0a4df44345dd" class="art-link" target="_blank" rel="noopener">
         <span data-lang="en" class="active">READ ON MEDIUM ↗</span>
@@ -783,7 +821,7 @@ document.querySelectorAll('.lang-btn').forEach(btn=>{
 });
 
 // Marquee
-const items=['C# / .NET','Python','AI Agents','Unity VR','Algorithms','Full-Stack','Automation','LeetCode 1000+','Tashkent, UZ','Exority Studio','Systems Thinking','Open to Work'];
+const items=['C# / .NET','Python','AI Agents','Unity VR','Algorithms','Full-Stack','Automation','LeetCode 1146+','Tashkent, UZ','Exority Studio','Systems Thinking','Open to Work'];
 const track=document.getElementById('mqt');
 track.innerHTML=(items.map(i=>`<span class="mq-item">${i}<span class="d">◆</span></span>`).join('')).repeat(2);
 
