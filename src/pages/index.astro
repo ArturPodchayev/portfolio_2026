@@ -229,6 +229,30 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 .foot-links a{font-family:var(--mono);font-size:11px;color:var(--muted);text-decoration:none;transition:color .2s;letter-spacing:.06em;cursor:none}
 .foot-links a:hover{color:var(--accent)}
 
+/* GALLERY GRID */
+.gallery-grid-new{
+  columns:4;
+  column-gap:4px;
+  gap:4px;
+  max-width:100%;
+}
+.gallery-grid-new .gi{
+  break-inside:avoid;
+  margin-bottom:4px;
+  overflow:hidden;
+  position:relative;
+  cursor:none;
+}
+.gallery-grid-new .gi img{
+  width:100%;
+  height:auto;
+  display:block;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),filter .4s ease;
+  filter:grayscale(15%) brightness(0.82);
+}
+.gallery-grid-new .gi:hover img{transform:scale(1.04);filter:grayscale(0%) brightness(1)}
+@media(max-width:768px){.gallery-grid-new{columns:2}}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
 .reveal.in{opacity:1;transform:none}
@@ -561,10 +585,19 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <div class="skill-row"><span class="skill-name">AI / LLMs</span><div class="skill-track"><div class="skill-fill" data-w="68%"></div></div><span class="skill-pct">68%</span></div>
       <div class="skill-row"><span class="skill-name">Unity / VR</span><div class="skill-track"><div class="skill-fill" data-w="63%"></div></div><span class="skill-pct">63%</span></div>
     </div>
+	
 
     <div class="bento-c">
       <div class="bento-label">STACK</div>
       <div class="bento-body" style="line-height:2.1">C# · .NET · Python · Django · Go<br>JS · TS · React · Next.js<br>PostgreSQL · MySQL · Redis · MongoDB<br>Docker · AWS · RabbitMQ<br>Unity · REST · GitHub</div>
+    </div>
+
+	<div class="bento-c" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="bento-label">PHILOSOPHY</div>
+      <blockquote style="font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.3;letter-spacing:-.02em;color:var(--text)">
+        <span data-lang="en" class="active">"Bad output —<br>non-bad outlook"</span>
+        <span data-lang="ru">"Слабый код —<br>неслабый драйв"</span>
+      </blockquote>
     </div>
 
     <div class="bento-c wide">
@@ -613,47 +646,18 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
   Порядок колонок: лево → право → лево → ...
   -->
 
-  <div class="gallery-masonry reveal">
-
-    <!-- Колонка 1: вертикальные / портреты -->
-    <div class="gallery-item">
-      <img src="/photos/solo1.png" alt="Artur" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
-    </div>
-
-    <div class="gallery-item">
-      <img src="/photos/friends1.jpg" alt="Friends" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
-    </div>
-
-    <div class="gallery-item">
-      <img src="/photos/solo2.jpg" alt="Artur" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
-    </div>
-
-    <!-- Колонка 2: горизонтальные / групповые -->
-    <div class="gallery-item">
-      <img src="/photos/community.jpg" alt="Community" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
-    </div>
-
-    <div class="gallery-item">
-      <img src="/photos/biennial.jpg" alt="Bukhara Biennial" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
-    </div>
-
-    <!-- Колонка 3 -->
-    <div class="gallery-item">
-      <img src="/photos/friends2.jpg" alt="Friends" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
-    </div>
-
-    <div class="gallery-item">
-      <img src="/photos/team.png" alt="Team" loading="lazy">
-      <div class="g-overlay"><span class="g-caption"></span></div>
-    </div>
-
-  </div>
+<div class="gallery-grid-new reveal">
+  <div class="gi"><img src="/photos/solo1.png" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/community.jpg" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/solo2.jpg" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/biennial.jpg" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/friends1.jpg" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/friends2.jpg" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/team.png" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/extra1.jpg" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/extra2.png" alt="" loading="lazy"></div>
+  <div class="gi"><img src="/photos/extra3.jpg" alt="" loading="lazy"></div>
+</div>
 </section>
 <!-- MUSIC -->
 <section id="music">
@@ -696,6 +700,35 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <p class="art-body"><span data-lang="en" class="active">The tools keep changing. What doesn't change is the responsibility to understand what you're building and why. A look at where the role is actually heading — beyond the AI hype</span><span data-lang="ru">Инструменты постоянно меняются. Неизменным остаётся одно — ответственность понимать, что и зачем ты строишь. Взгляд на то, куда на самом деле движется профессия — за пределами AI-хайпа</span></p>
       <a href="https://medium.com/@arturpodchayev/what-will-it-mean-to-be-a-software-engineer-by-2030-0a4df44345dd" class="art-link" target="_blank" rel="noopener"><span data-lang="en" class="active">READ ON MEDIUM ↗</span><span data-lang="ru">ЧИТАТЬ НА MEDIUM ↗</span></a>
     </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact-cta" style="padding:100px 48px;border-top:1px solid var(--border);text-align:center;position:relative;z-index:1">
+  <div style="font-family:var(--mono);font-size:11px;color:rgba(103,232,194,.35);letter-spacing:.12em;margin-bottom:24px">
+    // OPEN TO WORK · OPEN TO COLLABORATE
+  </div>
+  <h2 style="font-size:clamp(40px,6vw,80px);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:20px">
+    <span data-lang="en" class="active">Let's build<br><span style="color:var(--accent)">something</span></span>
+    <span data-lang="ru">Давайте сделаем<br><span style="color:var(--accent)">что-нибудь</span></span>
+  </h2>
+  <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.8;max-width:420px;margin:0 auto 48px">
+    <span data-lang="en" class="active">Backend systems, AI automation, product ideas — if you have a problem worth solving, I want to hear about it</span>
+    <span data-lang="ru">Бэкенд-системы, AI-автоматизация, продуктовые идеи — если у тебя есть задача, я хочу её услышать</span>
+  </p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a href="https://t.me/Artur_IT_developer" target="_blank" rel="noopener"
+      style="display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#07050f;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;padding:15px 28px;text-decoration:none;transition:transform .2s,box-shadow .2s"
+      onmouseenter="this.style.transform='translate(-2px,-2px)';this.style.boxShadow='4px 4px 0 rgba(103,232,194,.2)'"
+      onmouseleave="this.style.transform='';this.style.boxShadow=''">
+      TELEGRAM ↗
+    </a>
+    <a href="mailto:arturpodchaev@gmail.com" target="_blank" rel="noopener"
+      style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:15px 28px;border:1px solid var(--border);text-decoration:none;transition:color .2s,border-color .2s"
+      onmouseenter="this.style.color='var(--text)';this.style.borderColor='rgba(103,232,194,.16)'"
+      onmouseleave="this.style.color='';this.style.borderColor=''">
+      EMAIL →
+    </a>
   </div>
 </section>
 
