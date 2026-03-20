@@ -7,6 +7,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Artur Podchaev — Full-Stack Engineer, AI Systems, Product Builder from Tashkent.">
 <title>Artur Podchaev // System Architect</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:title" content="Artur Podchaev — Backend Engineer & Product Builder">
+<meta property="og:description" content="17 y.o. backend engineer from Tashkent. REST APIs, AI pipelines, VR simulations. Building at Insight, running Exority Studio.">
+<meta property="og:url" content="https://arturpodchaev.uz">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Artur Podchaev — Backend Engineer">
+<meta name="twitter:description" content="17 y.o. backend engineer from Tashkent. Building systems that ship.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
@@ -257,6 +265,14 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
 .reveal.in{opacity:1;transform:none}
 @media(max-width:768px){
+.burger{display:flex !important} 
+.burger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.burger span{width:20px;height:1px;background:var(--accent);transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:52px;left:0;right:0;z-index:99;background:rgba(7,5,15,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:20px}
+.mobile-menu.open{display:block}
+.mobile-menu a{display:block;font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:.08em;padding:14px 0;border-bottom:1px solid var(--border)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover{color:var(--accent)}
   body{cursor:auto}
   #cur,#cur-r{display:none}
   nav{padding:14px 20px}
@@ -306,8 +322,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">AP // v2.0</div>
-  <ul class="nav-links">
+  <div class="nav-logo">WELCOME!</div>
+   <ul class="nav-links">
     <li><a href="#projects"><span data-lang="en" class="active">projects</span><span data-lang="ru">проекты</span></a></li>
     <li><a href="#experience"><span data-lang="en" class="active">experience</span><span data-lang="ru">опыт</span></a></li>
     <li><a href="#about"><span data-lang="en" class="active">about</span><span data-lang="ru">обо мне</span></a></li>
@@ -325,7 +341,32 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
       <button class="lang-btn active" data-switch="en">EN</button>
       <button class="lang-btn" data-switch="ru">RU</button>
     </div>
+    <button class="burger" id="burger" style="background:none;border:none;padding:4px" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#projects" onclick="this.closest('.mobile-menu').classList.remove('open')"><span data-lang="en" class="active">projects</span><span data-lang="ru">проекты</span></a>
+  <a href="#experience" onclick="this.closest('.mobile-menu').classList.remove('open')"><span data-lang="en" class="active">experience</span><span data-lang="ru">опыт</span></a>
+  <a href="#about" onclick="this.closest('.mobile-menu').classList.remove('open')"><span data-lang="en" class="active">about</span><span data-lang="ru">обо мне</span></a>
+  <a href="#gallery" onclick="this.closest('.mobile-menu').classList.remove('open')"><span data-lang="en" class="active">photos</span><span data-lang="ru">фото</span></a>
+  <a href="#articles" onclick="this.closest('.mobile-menu').classList.remove('open')"><span data-lang="en" class="active">writing</span><span data-lang="ru">статьи</span></a>
+  <a href="#contact-cta" onclick="this.closest('.mobile-menu').classList.remove('open')"><span data-lang="en" class="active">contact</span><span data-lang="ru">контакты</span></a>
+</div>
+  <button class="burger" id="burger" style="display:none;background:none;border:none;padding:4px" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+  <span></span><span></span><span></span>
+</button>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#projects" onclick="document.getElementById('mobileMenu').classList.remove('open')"><span data-lang="en" class="active">projects</span><span data-lang="ru">проекты</span></a>
+  <a href="#experience" onclick="document.getElementById('mobileMenu').classList.remove('open')"><span data-lang="en" class="active">experience</span><span data-lang="ru">опыт</span></a>
+  <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')"><span data-lang="en" class="active">about</span><span data-lang="ru">обо мне</span></a>
+  <a href="#gallery" onclick="document.getElementById('mobileMenu').classList.remove('open')"><span data-lang="en" class="active">photos</span><span data-lang="ru">фото</span></a>
+  <a href="#articles" onclick="document.getElementById('mobileMenu').classList.remove('open')"><span data-lang="en" class="active">writing</span><span data-lang="ru">статьи</span></a>
+  <a href="#contact-cta" onclick="document.getElementById('mobileMenu').classList.remove('open')"><span data-lang="en" class="active">contact</span><span data-lang="ru">контакты</span></a>
+</div>
 </nav>
 
 <!-- HERO -->
@@ -705,16 +746,14 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 
 <!-- CTA -->
 <section id="contact-cta" style="padding:100px 48px;border-top:1px solid var(--border);text-align:center;position:relative;z-index:1">
-  <div style="font-family:var(--mono);font-size:11px;color:rgba(103,232,194,.35);letter-spacing:.12em;margin-bottom:24px">
-    // OPEN TO WORK · OPEN TO COLLABORATE
-  </div>
+
   <h2 style="font-size:clamp(40px,6vw,80px);font-weight:800;letter-spacing:-.03em;line-height:1;margin-bottom:20px">
     <span data-lang="en" class="active">Let's build<br><span style="color:var(--accent)">something</span></span>
     <span data-lang="ru">Давайте сделаем<br><span style="color:var(--accent)">что-нибудь</span></span>
   </h2>
   <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.8;max-width:420px;margin:0 auto 48px">
     <span data-lang="en" class="active">Backend systems, AI automation, product ideas — if you have a problem worth solving, I want to hear about it</span>
-    <span data-lang="ru">Бэкенд-системы, AI-автоматизация, продуктовые идеи — если у тебя есть задача, я хочу её услышать</span>
+    <span data-lang="ru">Бэкенд-системы, AI-автоматизация, продуктовые идеи — если у вас есть задача, я хочу её услышать</span>
   </p>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
     <a href="https://t.me/Artur_IT_developer" target="_blank" rel="noopener"
@@ -734,7 +773,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:36
 
 <!-- FOOTER -->
 <footer id="contact">
-  <div class="foot-copy">© 2026 ARTUR PODCHAEV // ALL SYSTEMS OPERATIONAL</div>
+  <div class="foot-copy">© 2026 ARTUR PODCHAEV x EXORITY STUDIO</div>
   <div class="foot-links">
     <a href="https://github.com/ArturPodchayev" target="_blank" rel="noopener">GitHub</a>
     <a href="https://linkedin.com/in/arturpodchayev" target="_blank" rel="noopener">LinkedIn</a>
